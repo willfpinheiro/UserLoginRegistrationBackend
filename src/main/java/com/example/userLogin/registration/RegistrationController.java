@@ -13,7 +13,7 @@ public class RegistrationController {
 
     private RegistrationService registrationService;
 
-    @PostMapping
+    @PostMapping //aqui é feito o registro da pessoa que esta tentando acessar
     public String register(@RequestBody RegistrationRequest request){
 
         return registrationService.register(request);

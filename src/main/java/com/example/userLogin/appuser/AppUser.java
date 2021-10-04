@@ -16,8 +16,8 @@ import java.util.Collections;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-@Entity
-public class AppUser implements UserDetails {
+@Entity //assim será uma tabela no banco de dados
+public class AppUser implements UserDetails { // utilizamos UserDetais para poder trabalhar com security
 
 
     @SequenceGenerator(
@@ -56,7 +56,7 @@ public class AppUser implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
-                new SimpleGrantedAuthority(appUserRole.name());
+                new SimpleGrantedAuthority(appUserRole.name()); //Coletar se é user ou admin
         return Collections.singletonList(authority);
     }
 

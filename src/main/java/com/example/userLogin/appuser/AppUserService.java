@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
+//claase criada para fornecer a interface para o usuario
 @Service
-@AllArgsConstructor //faz com que nao precise criar os constructor //especifica para spring security
+@AllArgsConstructor //faz com que nao precise criar os constructor //implements UserDeta... especifica para spring security
 public class AppUserService implements UserDetailsService {
 
-    private final static String USER_NOT_FOUND = "USER WITH EMAIL %S NOT FOUND";
+    private final static String USER_NOT_FOUND = "USER WITH EMAIL %s NOT FOUND";
     private final AppUserRepository appUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
@@ -41,10 +41,10 @@ public class AppUserService implements UserDetailsService {
 
         //criptografar o password
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
-//Repassar a senha criptografada
+        //Repassar a senha criptografada
         appUser.setPassword(encodedPassword);
 
-//        Salvar o usuario
+        //Salvar o usuario
         appUserRepository.save(appUser);
 
         String token = UUID.randomUUID().toString();
