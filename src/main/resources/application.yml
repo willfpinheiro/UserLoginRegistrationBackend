@@ -5,12 +5,14 @@ server:
 
 spring:
   datasource:
-    password:
+    platform: postgres
+    password: "052230"
     url: jdbc:postgresql://localhost:5432/registration
-    username:
+    username: willfpinheiro
   jpa:
+    database: POSTGRESQL
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect

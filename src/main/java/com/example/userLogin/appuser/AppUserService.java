@@ -13,8 +13,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor //faz com que nao precise criar os constructor
-//especifica para spring security
+@AllArgsConstructor //faz com que nao precise criar os constructor //especifica para spring security
 public class AppUserService implements UserDetailsService {
 
     private final static String USER_NOT_FOUND = "USER WITH EMAIL %S NOT FOUND";
@@ -33,8 +32,7 @@ public class AppUserService implements UserDetailsService {
 
     public String singUpUser(AppUser appUser){
         //Verifica se o usuario existe
-        boolean userExists = appUserRepository.findByEmail(appUser.getEmail())
-                .isPresent();
+        boolean userExists = appUserRepository.findByEmail(appUser.getEmail()).isPresent();
         if (userExists){
             //TODO check of attributes are the same and
             //TODO if email not confirmed send confirmation email
@@ -60,6 +58,7 @@ public class AppUserService implements UserDetailsService {
         );
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);
+                //TODO Send email
         return token;
     }
 
