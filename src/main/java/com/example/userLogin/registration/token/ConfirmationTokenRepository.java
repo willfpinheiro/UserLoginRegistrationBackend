@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ConfirmationTokenRepository
         extends JpaRepository<ConfirmationToken, Long> {
 
-    Optional<ConfirmationToken> findbyToken(String token);
+    Optional<ConfirmationToken> findByToken(String token);
 
     int updateConfirmedAt(String token,
                           LocalDateTime confirmedAt);

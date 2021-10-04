@@ -24,7 +24,6 @@ public class AppUser implements UserDetails { // utilizamos UserDetais para pode
             name = "student_sequence",
             sequenceName = "student_sequence",
             allocationSize = 1
-
     )
     @Id
     @GeneratedValue(
