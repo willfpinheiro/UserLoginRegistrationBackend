@@ -10,13 +10,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
+
 //claase criada para fornecer a interface para o usuario
 @Service
-@AllArgsConstructor //faz com que nao precise criar os constructor //implements UserDeta... especifica para spring security
+@AllArgsConstructor//faz com que nao precise criar os constructor //implements UserDeta... especifica para spring security
 public class AppUserService implements UserDetailsService {
 
     private final static String USER_NOT_FOUND = "USER WITH EMAIL %s NOT FOUND";
+
     private final AppUserRepository appUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
@@ -30,10 +33,10 @@ public class AppUserService implements UserDetailsService {
                                 String.format(USER_NOT_FOUND, email)));
     }
 
-    public String singUpUser(AppUser appUser){
+    public String singUpUser(AppUser appUser) {
         //Verifica se o usuario existe
         boolean userExists = appUserRepository.findByEmail(appUser.getEmail()).isPresent();
-        if (userExists){
+        if (userExists) {
             //TODO check of attributes are the same and
             //TODO if email not confirmed send confirmation email
             throw new IllegalStateException("Email already exists");
@@ -54,15 +57,18 @@ public class AppUserService implements UserDetailsService {
                 LocalDateTime.now(),
                 LocalDateTime.now().plusMinutes(15),
                 appUser
-
         );
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);
-                //TODO Send email
+        //TODO Send email
         return token;
     }
 
-    public int enableAppUser(String email) {
-        return appUserRepository.enableAppUser(email);
+    public AppUser enableAppUser(String email) {
+        Optional<AppUser> optionalAppUser = this.appUserRepository.findByEmail(email);
+        if (optionalAppUser.isEmpty()){}
+        AppUser appUser = optionalAppUser.get();
+        appUser.setEnabled(true);
+        return appUserRepository.save(appUser);
     }
 }

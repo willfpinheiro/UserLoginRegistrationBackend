@@ -19,7 +19,6 @@ import java.util.Collections;
 @Entity //assim será uma tabela no banco de dados
 public class AppUser implements UserDetails { // utilizamos UserDetais para poder trabalhar com security
 
-
     @SequenceGenerator(
             name = "student_sequence",
             sequenceName = "student_sequence",

@@ -14,7 +14,6 @@ public class ConfirmationTokenService {
 
     //quando o token é salvo no passamos uma confirmação de token
     public void saveConfirmationToken(ConfirmationToken token){
-
         confirmationTokenRepository.save(token);
     }
 
